@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="event"
+            type="com.dahlaran.simpleschooleventapp.models.Event" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/grey"
+        android:padding="@dimen/very_small_dim">
+
+        <ImageView
+            android:id="@+id/imageCellEvent"
+            android:layout_width="@dimen/image_event_dimens"
+            android:layout_height="@dimen/image_event_dimens"
+            android:layout_marginStart="@dimen/basic_dim"
+            android:background="@color/yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:id="@+id/dateCellEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_dim"
+            android:background="@color/dark"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/basic_dim"
+            android:paddingEnd="@dimen/basic_dim"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageCellEvent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/BigDarkTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Date"
+                android:text="@string/date"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{event.generateEventDateText()}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/basic_text"
+                tools:text="dd/mm" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/arrowCellEvent"
+            android:layout_width="@dimen/image_arrow_dimens"
+            android:layout_height="@dimen/image_arrow_dimens"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_arrow_forward"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleCellEvent"
+            style="@style/BigDarkTextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/small_dim"
+            android:layout_marginTop="@dimen/small_dim"
+            android:layout_marginEnd="@dimen/small_dim"
+            android:layout_marginBottom="@dimen/very_small_dim"
+            android:paddingStart="@dimen/small_dim"
+            android:paddingEnd="@dimen/small_dim"
+            android:text="@{event.title}"
+            app:layout_constraintBottom_toTopOf="@id/excerptCellEvent"
+            app:layout_constraintEnd_toStartOf="@id/arrowCellEvent"
+            app:layout_constraintStart_toEndOf="@id/dateCellEvent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/excerptCellEvent"
+            style="@style/BigDarkTextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/small_dim"
+            android:layout_marginTop="@dimen/small_dim"
+            android:layout_marginEnd="@dimen/small_dim"
+            android:layout_marginBottom="@dimen/small_dim"
+            android:paddingStart="@dimen/small_dim"
+            android:paddingEnd="@dimen/small_dim"
+            android:text="@{event.generateTextContent()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/arrowCellEvent"
+            app:layout_constraintStart_toEndOf="@id/dateCellEvent"
+            app:layout_constraintTop_toBottomOf="@id/titleCellEvent"
+            tools:text="Excerpt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

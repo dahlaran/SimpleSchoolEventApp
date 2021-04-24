@@ -1,5 +1,10 @@
 package com.dahlaran.simpleschooleventapp.models
 
+import android.text.Spanned
+import com.dahlaran.simpleschooleventapp.utils.DateUtils
+import com.dahlaran.simpleschooleventapp.utils.HtmlUtils
+import java.util.*
+
 data class Event(
     val address: Address,
     val appIds: String,
@@ -24,5 +29,27 @@ data class Event(
     val title: String,
     val type: String,
     val updatedAt: String
-)
+) {
+    private var contentSpanned: Spanned? = null
+    private var eventDateStart: Date? = null
+
+    fun generateEventDateText(): String {
+        if (eventDateStart == null) {
+            eventDateStart = DateUtils.getEventDateTime(dateStart)
+        }
+
+        return DateUtils.getStringToShowFromDate(eventDateStart)
+    }
+
+    fun generateTextContent(): String {
+        if (contentSpanned == null) {
+            contentSpanned = HtmlUtils.convertHtmlTextToShowText(content)
+        }
+
+        if (contentSpanned?.isNotEmpty() == true) {
+            return contentSpanned.toString().trim()
+        }
+        return ""
+    }
+}
 
