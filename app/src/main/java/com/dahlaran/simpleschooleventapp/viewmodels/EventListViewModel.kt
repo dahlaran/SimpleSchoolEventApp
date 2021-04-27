@@ -5,13 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dahlaran.simpleschooleventapp.data.EventRepository
 import com.dahlaran.simpleschooleventapp.models.Event
+import com.dahlaran.simpleschooleventapp.models.MonthEvent
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class EventListViewModel : ViewModel() {
-
+    private val disposable = CompositeDisposable()
     val dataLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     var eventList: MutableLiveData<List<Event>> = MutableLiveData()
 
@@ -21,7 +25,21 @@ class EventListViewModel : ViewModel() {
 
     fun getEventList() {
         viewModelScope.launch {
-            eventList = EventRepository.getEventList()
+            disposable.add(EventRepository.getMonthEventList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { // onNext
+                        eventList.postValue(it)
+                    },
+                    { // onError
+                        it.printStackTrace()
+                        dataLoading.postValue(false)
+                    },
+                    { // onComplete
+                        dataLoading.postValue(false)
+                    }
+                ))
         }
     }
 
@@ -31,9 +49,27 @@ class EventListViewModel : ViewModel() {
             val coroutineScope = CoroutineScope(Dispatchers.Default + Job())
 
             coroutineScope.launch {
-                EventRepository.updateEventList()
-                dataLoading.postValue(false)
+                disposable.add(EventRepository.updateEventList().subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { // onNext
+                            eventList.postValue(it)
+                        },
+                        { // onError
+                            it.printStackTrace()
+                            dataLoading.postValue(false)
+                        },
+                        { // onComplete
+                            dataLoading.postValue(false)
+                        }
+                    ))
             }
         }
+    }
+
+    override fun onCleared() {
+        // Remove observable if viewModel is destroyed
+        disposable.dispose()
+        super.onCleared()
     }
 }

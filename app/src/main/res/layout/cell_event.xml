@@ -21,11 +21,11 @@
             android:layout_width="@dimen/image_event_dimens"
             android:layout_height="@dimen/image_event_dimens"
             android:layout_marginStart="@dimen/basic_dim"
-            android:background="@color/yellow"
+            app:imageInsideMedia="@{event.medias}"
+            android:src="@drawable/placeholder_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <LinearLayout
             android:id="@+id/dateCellEvent"
@@ -45,8 +45,8 @@
                 style="@style/BigDarkTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Date"
-                android:text="@string/date"/>
+                android:text="@string/date"
+                tools:text="Date" />
 
             <TextView
                 android:layout_width="wrap_content"

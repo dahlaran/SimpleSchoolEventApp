@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".SimpleSchoolEventApplication"
         android:theme="@style/Theme.SimpleSchoolEventApp">
         <activity android:name=".views.activities.MainActivity">
             <intent-filter>

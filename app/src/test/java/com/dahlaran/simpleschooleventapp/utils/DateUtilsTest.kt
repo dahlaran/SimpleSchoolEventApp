@@ -36,6 +36,15 @@ class DateUtilsTest {
     }
 
     @Test
+    fun getYearFromDateCheck() {
+        val dateString = "2021-04-24T12:00:00+00:00"
+        val date: Date? = DateUtils.getEventDateTime(dateString)
+
+        assert(date != null)
+        Assert.assertEquals(2021, DateUtils.getYearFromDate(date!!))
+    }
+
+    @Test
     fun getMonthFromDateCheck() {
         val dateString = "2021-04-24T12:00:00+00:00"
         val date: Date? = DateUtils.getEventDateTime(dateString)

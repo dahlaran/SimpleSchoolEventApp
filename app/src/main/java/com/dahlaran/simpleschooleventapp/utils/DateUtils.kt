@@ -21,6 +21,12 @@ object DateUtils {
         }
     }
 
+    fun getYearFromDate(date: Date): Int {
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        return calendar[Calendar.YEAR]
+    }
+
     fun getMonthFromDate(date: Date): Int {
         val calendar = Calendar.getInstance()
         calendar.time = date

@@ -1,4 +1,4 @@
-package com.dahlaran.simpleschooleventapp.data
+package com.dahlaran.simpleschooleventapp.data.remote
 
 import com.dahlaran.simpleschooleventapp.models.Event
 import io.reactivex.Observable

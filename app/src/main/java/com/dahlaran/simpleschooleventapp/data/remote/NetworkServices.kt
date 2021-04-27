@@ -1,4 +1,4 @@
-package com.dahlaran.simpleschooleventapp.data
+package com.dahlaran.simpleschooleventapp.data.remote
 
 import com.dahlaran.simpleschooleventapp.BuildConfig
 import com.google.gson.GsonBuilder
