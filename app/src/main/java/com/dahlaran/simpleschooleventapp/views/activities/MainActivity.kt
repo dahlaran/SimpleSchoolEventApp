@@ -8,6 +8,7 @@ import com.dahlaran.simpleschooleventapp.R
 import com.dahlaran.simpleschooleventapp.databinding.ActivityMainBinding
 import com.dahlaran.simpleschooleventapp.viewmodels.EventListViewModel
 import com.dahlaran.simpleschooleventapp.views.adapters.EventListAdapter
+import com.dahlaran.simpleschooleventapp.views.adapters.MonthEventListAdapter
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -29,9 +30,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpListAdapter() {
-        val listAdapter = EventListAdapter()
+        val listAdapter = MonthEventListAdapter()
 
-        binding.eventRecycler.apply {
+        binding.monthEventRecycler.apply {
             adapter = listAdapter
             layoutManager = LinearLayoutManager(context)
         }

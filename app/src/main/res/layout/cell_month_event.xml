@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="event_month"
+            type="com.dahlaran.simpleschooleventapp.models.MonthEvent" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/BigDarkTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/big_dim"
+            android:paddingTop="@dimen/small_dim"
+            android:paddingEnd="@dimen/big_dim"
+            android:paddingBottom="@dimen/small_dim"
+            android:text="@{@string/date_event_month(event_month.month, event_month.year)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="January 2021" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/eventRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:items="@{event_month.eventList}"
+            tools:itemCount="3"
+            tools:listitem="@layout/cell_event" />
+
+    </LinearLayout>
+</layout>
