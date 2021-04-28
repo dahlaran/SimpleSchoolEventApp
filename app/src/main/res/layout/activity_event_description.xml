@@ -1,6 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.dahlaran.simpleschooleventapp.viewmodels.EventViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarDescription"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/backToolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/btn_navigation_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/shareToolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/btn_navigation_share"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleToolbar"
+                    style="@style/BigDarkTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/big_dim"
+                    android:layout_marginTop="@dimen/small_dim"
+                    android:layout_marginEnd="@dimen/big_dim"
+                    android:layout_marginBottom="@dimen/small_dim"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/small_dim"
+                    android:paddingEnd="@dimen/small_dim"
+                    android:text="@{viewModel.event.title}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/shareToolbar"
+                    app:layout_constraintStart_toEndOf="@id/backToolbar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Title" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/basic_dim"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@id/addCalendarLayout"
+            app:layout_constraintTop_toBottomOf="@id/toolbarDescription">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/big_dim"
+                android:paddingEnd="@dimen/big_dim">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/mapImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/btn_action_map"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        style="@style/GreenTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@color/green"
+                        android:paddingStart="@dimen/basic_dim"
+                        android:paddingEnd="@dimen/basic_dim"
+                        android:text="@{viewModel.event.address.streetAddress}"
+                        android:textSize="@dimen/basic_text"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/mapImage"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/mapImage"
+                        app:layout_constraintTop_toTopOf="@id/mapImage"
+                        tools:text="Address" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/BigDarkTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/big_dim"
+                    android:paddingStart="@dimen/big_dim"
+                    android:paddingTop="@dimen/small_dim"
+                    android:paddingEnd="@dimen/big_dim"
+                    android:paddingBottom="@dimen/small_dim"
+                    android:text="@{viewModel.event.dateStart}"
+                    tools:text="Date" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/basic_dim"
+                    android:background="@color/dark"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/big_dim"
+                    android:paddingTop="@dimen/small_dim"
+                    android:paddingEnd="@dimen/big_dim"
+                    android:paddingBottom="@dimen/small_dim"
+                    android:text="@{viewModel.event.generateTextContent() + viewModel.event.generateTextContent()}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/basic_text"
+                    tools:text="Content" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/addCalendarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/big_dim"
+            android:paddingEnd="@dimen/big_dim"
+            android:paddingBottom="@dimen/big_dim"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/addCalendarText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/green"
+                android:gravity="center"
+                android:padding="@dimen/big_dim"
+                android:text="Add to calendar"
+                android:textColor="@color/white"
+                android:textSize="@dimen/basic_text"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

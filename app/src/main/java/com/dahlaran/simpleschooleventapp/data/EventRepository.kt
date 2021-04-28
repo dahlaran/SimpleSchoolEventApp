@@ -68,6 +68,10 @@ object EventRepository {
         return monthEventList
     }
 
+    suspend fun getEvent(eventId: String): Event {
+        return eventDB.eventDao().getEvent(eventId)
+    }
+
     private fun saveIntoDatabase(list: List<Event>): List<Event> {
         // Generate date
         list.forEach {

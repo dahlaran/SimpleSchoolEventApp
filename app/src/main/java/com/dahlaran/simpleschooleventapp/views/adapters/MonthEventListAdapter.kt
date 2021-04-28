@@ -15,11 +15,13 @@ import com.dahlaran.simpleschooleventapp.models.MonthEvent
 class MonthEventListAdapter(val onclickItemCallback: (itemClicked: Event) -> Unit) :
     ListAdapter<MonthEvent, MonthEventListAdapter.MonthEventViewHolder>(MonthEventDiffUtils()) {
 
-    class MonthEventViewHolder(val binding: CellMonthEventBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class MonthEventViewHolder(
+        val binding: CellMonthEventBinding,
+        val onclickItemCallback: ((itemClicked: Event) -> Unit)
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            val listAdapter = EventListAdapter()
+            val listAdapter = EventListAdapter(onclickItemCallback)
 
             binding.eventRecycler.apply {
                 adapter = listAdapter
@@ -39,7 +41,7 @@ class MonthEventListAdapter(val onclickItemCallback: (itemClicked: Event) -> Uni
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonthEventViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = CellMonthEventBinding.inflate(layoutInflater, parent, false)
-        return MonthEventViewHolder(binding)
+        return MonthEventViewHolder(binding, onclickItemCallback)
     }
 
     override fun onBindViewHolder(holder: MonthEventViewHolder, position: Int) {
