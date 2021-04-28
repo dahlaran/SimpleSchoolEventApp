@@ -19,4 +19,7 @@ interface EventDao {
     // TODO: Check why can't put suspend to return a flowable
     @Query("SELECT * FROM event_table")
     fun getAll(): Flowable<List<Event>>
+
+    @Query("SELECT * FROM event_table WHERE id=:eventId")
+    suspend fun getEvent(eventId: String): Event
 }

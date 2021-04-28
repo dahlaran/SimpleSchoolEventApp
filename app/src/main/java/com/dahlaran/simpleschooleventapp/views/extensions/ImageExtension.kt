@@ -12,10 +12,10 @@ import org.json.JSONObject
 
 
 @BindingAdapter("app:imageInsideMedia")
-fun loadImageInsideMedia(imageView: ImageView, mediaList: List<String>?) {
+fun loadImageInsideMedia(imageView: ImageView, mediaList: List<Media>?) {
     if (mediaList?.isEmpty() == false) {
         imageView.loadUrl(
-            Media.fromJson(JSONObject(mediaList[0])).url,
+            mediaList[0].url,
             R.drawable.placeholder_image
         )
     } else {

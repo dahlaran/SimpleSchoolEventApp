@@ -23,12 +23,12 @@
             app:refreshing="@{view_model.dataLoading}">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/eventRecycler"
+            android:id="@+id/monthEventRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:items="@{view_model.eventList}"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/cell_event" />
+            tools:listitem="@layout/cell_month_event" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

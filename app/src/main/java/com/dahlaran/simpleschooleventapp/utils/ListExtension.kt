@@ -1,6 +1,5 @@
 package com.dahlaran.simpleschooleventapp.utils
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.dahlaran.simpleschooleventapp.models.Category
 import com.dahlaran.simpleschooleventapp.models.Media
 import com.dahlaran.simpleschooleventapp.models.Payload
@@ -12,7 +11,7 @@ fun <T> List<T>.toJson(): String {
     return Gson().toJson(this)
 }
 
-fun <T> List<T>.fromJson(jsonArray: JSONArray?): List<T> {
+inline fun <reified T> List<T>.fromJson(jsonArray: JSONArray?): List<T> {
     val listdata = ArrayList<T>()
     val jArray = jsonArray
     if (jArray != null) {

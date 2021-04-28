@@ -4,6 +4,7 @@
     <dimen name="small_dim">6dp</dimen>
     <dimen name="basic_dim">12dp</dimen>
     <dimen name="big_dim">18dp</dimen>
+    <dimen name="very_big_dim">24dp</dimen>
 
     <dimen name="basic_text">16sp</dimen>
     <dimen name="big_text">20sp</dimen>

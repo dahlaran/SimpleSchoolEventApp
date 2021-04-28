@@ -12,14 +12,25 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
-    
-    <style name="DarkTextView">
-        <item name="android:textColor">@color/white</item>
+
+    <style name="CustomTextView">
         <item name="android:gravity">center_vertical</item>
-        <item name="android:background">@color/dark</item>
         <item name="android:ellipsize">end</item>
         <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="DarkTextView" parent="CustomTextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/dark</item>
+    </style>
+
+    <style name="GreenTextView" parent="CustomTextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/green</item>
+
     </style>
 
     <style name="BigDarkTextView" parent="DarkTextView">

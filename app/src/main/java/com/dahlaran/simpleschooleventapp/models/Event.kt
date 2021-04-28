@@ -21,7 +21,7 @@ data class Event(
     val editor_access: Boolean,
     @PrimaryKey val id: String,
     val linksToItem: List<String>,
-    val medias: List<String>,
+    val medias: List<Media>,
     val name: String,
     val owner: String,
     val parentsFixedAt: String,

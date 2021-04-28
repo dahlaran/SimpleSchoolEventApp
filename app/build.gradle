@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        sign {
+            storeFile file('..\\key\\key store.jks')
+            storePassword 'password'
+            keyAlias 'key0'
+            keyPassword 'password'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
@@ -20,8 +28,18 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sign
+        }
+        releaseDebuggable {
+            shrinkResources true
+            minifyEnabled true
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sign
         }
     }
     compileOptions {

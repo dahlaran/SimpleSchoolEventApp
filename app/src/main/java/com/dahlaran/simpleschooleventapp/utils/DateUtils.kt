@@ -1,5 +1,6 @@
 package com.dahlaran.simpleschooleventapp.utils
 
+import java.text.DateFormatSymbols
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,5 +45,9 @@ object DateUtils {
             String.format("%02d", DateUtils.getDayOfWeekFromDate(it)) + "/" +
                     String.format("%02d", DateUtils.getMonthFromDate(it))
         } ?: ""
+    }
+
+    fun getMonthString(month: Int): String {
+        return DateFormatSymbols().getMonths().get(month - 1)
     }
 }
