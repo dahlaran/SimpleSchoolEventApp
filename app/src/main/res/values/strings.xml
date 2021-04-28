@@ -2,5 +2,5 @@
     <string name="app_name">Simple School Event App</string>
     <string name="date">Date</string>
 
-    <string name="date_event_month">%d %d</string>
+    <string name="date_event_month">%s %d</string>
 </resources>

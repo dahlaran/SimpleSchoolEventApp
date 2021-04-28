@@ -22,7 +22,7 @@
             android:paddingTop="@dimen/small_dim"
             android:paddingEnd="@dimen/big_dim"
             android:paddingBottom="@dimen/small_dim"
-            android:text="@{@string/date_event_month(event_month.month, event_month.year)}"
+            android:text="@{@string/date_event_month(event_month.getEventMonthShow(), event_month.year)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="January 2021" />
