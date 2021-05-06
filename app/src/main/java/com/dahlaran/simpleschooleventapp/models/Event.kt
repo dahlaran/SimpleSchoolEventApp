@@ -11,27 +11,13 @@ import java.util.*
 @Entity(tableName = "event_table")
 data class Event(
     val address: Address,
-    val appIds: String,
     val categories: List<Category>,
     val content: String,
-    val createdAt: String,
-    val createdBy: String,
     val dateEnd: String,
     val dateStart: String,
-    val editor_access: Boolean,
     @PrimaryKey val id: String,
-    val linksToItem: List<String>,
     val medias: List<Media>,
-    val name: String,
-    val owner: String,
-    val parentsFixedAt: String,
-    val payload: Payload,
-    val payload_schema: String,
-    val publishState: String,
-    val slug: String,
     val title: String,
-    val type: String,
-    val updatedAt: String
 ) {
     @Ignore private var contentSpanned: Spanned? = null
     @Ignore var eventDateStart: Date? = null

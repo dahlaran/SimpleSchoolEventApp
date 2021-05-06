@@ -4,6 +4,8 @@ import com.dahlaran.simpleschooleventapp.data.database.EventDatabase
 import com.dahlaran.simpleschooleventapp.data.remote.NetworkServices
 import com.dahlaran.simpleschooleventapp.data.remote.NomadEducationApi
 import com.dahlaran.simpleschooleventapp.models.Event
+import com.dahlaran.simpleschooleventapp.models.Item
+import com.dahlaran.simpleschooleventapp.models.ItemType
 import com.dahlaran.simpleschooleventapp.models.MonthEvent
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -16,7 +18,7 @@ object EventRepository {
 
     private val eventDB = EventDatabase.getInstance()
 
-    suspend fun getMonthEventList(): Flowable<List<MonthEvent>> {
+    suspend fun getMonthEventList(): Flowable<List<Item>> {
         return eventDB.eventDao().getAll().flatMap { eventList ->
             if (eventList.isEmpty()) {
                 service.getEventsFromJsonFile()
@@ -34,38 +36,34 @@ object EventRepository {
                             println("onComplete")
                         });
             }
-            Flowable.just(seperateListIntoMonthEvent(eventList))
+            Flowable.just(convertEventListIntoItemList(eventList))
         }
     }
 
-    suspend fun updateEventList(): Observable<List<MonthEvent>> {
+    suspend fun updateEventList(): Observable<List<Item>> {
         return service.getEventsFromJsonFile().map {
-            seperateListIntoMonthEvent(saveIntoDatabase(it))
+            convertEventListIntoItemList(saveIntoDatabase(it))
         }
     }
 
-    fun seperateListIntoMonthEvent(eventListToSeperate: List<Event>): List<MonthEvent> {
-        val monthEventList: MutableList<MonthEvent> = mutableListOf()
-        if (eventListToSeperate.size > 0) {
+    fun convertEventListIntoItemList(eventListToSeperate: List<Event>): List<Item> {
+        val itemList: MutableList<Item> = mutableListOf()
 
-            var tmpEventList: MutableList<Event> = mutableListOf()
+        if (eventListToSeperate.size > 0) {
             var eventYear = eventListToSeperate[0].getEventYear()
             var eventMonth = eventListToSeperate[0].getEventMonth()
+            itemList.add(Item(MonthEvent(eventYear, eventMonth), ItemType.TYPE_MONTH))
 
             eventListToSeperate.forEach {
-                if (it.getEventYear() == eventYear && it.getEventMonth() == eventMonth) {
-                    tmpEventList.add(it)
-                } else {
-                    monthEventList.add(MonthEvent(tmpEventList, eventYear, eventMonth))
-                    tmpEventList = mutableListOf()
-                    tmpEventList.add(it)
+                if (it.getEventYear() != eventYear || it.getEventMonth() != eventMonth) {
                     eventYear = it.getEventYear()
                     eventMonth = it.getEventMonth()
+                    itemList.add(Item(MonthEvent(eventYear, eventMonth), ItemType.TYPE_MONTH))
                 }
+                itemList.add(Item(it, ItemType.TYPE_EVENT))
             }
-            monthEventList.add(MonthEvent(tmpEventList, eventYear, eventMonth))
         }
-        return monthEventList
+        return itemList
     }
 
     suspend fun getEvent(eventId: String): Event {
