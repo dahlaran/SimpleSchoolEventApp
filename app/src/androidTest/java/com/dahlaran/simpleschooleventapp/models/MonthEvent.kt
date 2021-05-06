@@ -10,7 +10,7 @@ class MonthEventTest {
 
     @Before
     fun before(){
-        monthEvent = MonthEvent(mutableListOf(), 2012, 12)
+        monthEvent = MonthEvent(2012, 12)
     }
 
     @Test

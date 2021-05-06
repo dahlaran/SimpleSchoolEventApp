@@ -26,14 +26,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="January 2021" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/eventRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:items="@{event_month.eventList}"
-            tools:itemCount="3"
-            tools:listitem="@layout/cell_event" />
-
     </LinearLayout>
 </layout>

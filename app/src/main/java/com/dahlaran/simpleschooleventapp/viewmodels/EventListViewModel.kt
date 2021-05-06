@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dahlaran.simpleschooleventapp.data.EventRepository
+import com.dahlaran.simpleschooleventapp.models.Item
 import com.dahlaran.simpleschooleventapp.models.MonthEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 class EventListViewModel : ViewModel() {
     private val disposable = CompositeDisposable()
     val dataLoading: MutableLiveData<Boolean> = MutableLiveData(false)
-    var eventList: MutableLiveData<List<MonthEvent>> = MutableLiveData()
+    var eventList: MutableLiveData<List<Item>> = MutableLiveData()
 
     init {
         getEventList()

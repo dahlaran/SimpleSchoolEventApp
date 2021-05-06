@@ -23,7 +23,7 @@
             app:refreshing="@{view_model.dataLoading}">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/monthEventRecycler"
+            android:id="@+id/itemListRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:items="@{view_model.eventList}"

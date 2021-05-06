@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 import com.dahlaran.simpleschooleventapp.SimpleSchoolEventApplication
 import com.dahlaran.simpleschooleventapp.models.Event
 
-@Database(entities = arrayOf(Event::class), version = 1)
+@Database(entities = arrayOf(Event::class), version = 2)
 @TypeConverters(TypeConverter::class)
 abstract class EventDatabase : RoomDatabase() {
     abstract fun eventDao(): EventDao
